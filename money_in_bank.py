@@ -1,9 +1,9 @@
 
-size_of_dollar =int(input("const in dollars:"))
-size_of_funts =int(input("Money in funts:"))
+size_of_dollar =float(input("const in dollars:"))
+size_of_funts =float(input("Money in funts:"))
 
-dollar=int(input("Money in dollars:"))
-funt=int(input("Money in funts:"))
+dollar=float(input("Money in dollars:"))
+funt=float(input("Money in funts:"))
 
 rubles=dollar*size_of_dollar+size_of_funts*funt 
 
