@@ -5,9 +5,9 @@
 #include <string>
 using namespace std;
 
-int temperature(int ftemp)
+int temperaturec()
 {// Переводим температуру из форенгейта в цельсию
-  
+    int ftemp;
     cout << "Введите температуру по Форенгейту";
     cin >> ftemp;
     int ctemp = (ftemp - 32) * 5 / 9;
@@ -16,20 +16,37 @@ int temperature(int ftemp)
     return ctemp;
     
 }
+int temperaturef()
+{   // Цельсия для другой функции
+    int ctempf;
+    cout << "Введите температуру по Цельсия";
+    cin >> ctempf;
+    // перевод из Цельсия в Форенгейты
+    int ftempf = (ctempf * 1,8)+32;
+    cout << "Температура по градусам Форенгейта" << ftempf << '\n';
+
+    return ftempf;
+
+}
+
 
 int main()
 {  
-    system("1251 > null");
+ 
     string task;
     cout << "Введите задачу" ;
     cin >> task;
-    if (task =="temp")
-    {  
-        temperature();
+    if (task == "tempc")
+    {
+        // вернем значение  ctemp
+        int call_function_tempc;
+        call_function_tempc = temperaturec();
     }
-
-   
-     
+    if (task == "tempf")
+    {
+        int call_function_tempf;
+        call_function_tempf = temperaturef();
+    }
    
     return 0;
 
