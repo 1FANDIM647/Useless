@@ -1,13 +1,16 @@
 import random
+import os
+
 import datetime
+import time
 import colorama
 from colorama import Fore, Back, Style
 colorama.init()
-print("\t\t\t\t\tDUNIX 1.0")
-print("\t\t\tCopyright (c) Blessedsoft corparation ,2000 ©. Belguim\n")
+print("\t\t\t\t\tMICRO_TERMINAL 0.6")
+print("\t\t\tCopyright (c) Blessedsoft corparation ,2000 ©. Australia\n")
 print("\n")
 
-
+print(time.ctime()) 
 print(datetime.date.today())# time now 
 
 
@@ -36,6 +39,7 @@ print(Fore.YELLOW+ "DISK                 | F3 |    ")
 print(Fore.GREEN+  "MEMORY NTFS          | F4 | ")
 print(Fore.MAGENTA+"Configuration        | F5 |")
 print(Fore.GREEN+  "Ip loader on screen        ")
+print(Fore.GREEN+"GENERATE PASSWORD  |GEN_PASS|  ")
 
 print(Style.RESET_ALL)
 
@@ -71,8 +75,10 @@ def binary_search(list ,item):
             low = mid +1
     return None 
 #each file has prioritet 
-LIST_FILES_AND_THEIR_NUMBER = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]
 
+LIST_FILES_AND_THEIR_NUMBER = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]
+#version of kernel 
+version_of_kernel = "0.5.2"
 choose_command=""
 while not choose_command:
 
@@ -149,7 +155,9 @@ while not choose_command:
                ACPI    Driver by BlessedSoft  Kernel
                Adev    Driver by BlessedSoft  Kernel
                Amd8    Driver by AMD          Kernel
-               AmdK    Driver by AMD          Kernel
+               AmdS    Driver by AMD          Kernel
+               Amd7    Driver by AMD          Kernel
+               AmdK    Keyboard               Kernel
             """)      
     elif (choose_command == "ip_loader_on_screen"):
        
@@ -167,16 +175,33 @@ while not choose_command:
             France_ip_second_number = random.randint(12,31)
             France_ip_third_number = random.randint(1,100)
             France_ip_firth_number =random.randint(1,69)
-            print("Your IP in Belgium :" , France_ip_first_number , "." ,France_ip_second_number ,".",France_ip_third_number,".",France_ip_firth_number)
+            print("Your IP in France :" , France_ip_first_number , "." ,France_ip_second_number ,".",France_ip_third_number,".",France_ip_firth_number)
+    elif (choose_command == "GEN_PASS"):
+        chars = '+-/&*()$#@!1234567890qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM'
+        number_of_passwords = int(input("How much passwords do you want to generate ?:"))      
+        lenght_of_password = int(input("Lenght_of_password:"))                   
+        
+        for x in range(number_of_passwords):
+            password_g =''
 
+            for i in range(lenght_of_password):
+                password_g +=random.choice(chars)
+            print (password_g)     
+            
+            #write down passwords in text file 
 
-                           
-
-
-
+            file_passwords_generate = open('passswords.txt', 'a')
+            file_passwords_generate.write('\n' + password_g)
+            file_passwords_generate.close()
     #command for skip operation    
     elif (choose_command == "skip"):
         print("section is not choosed") 
+    #if we  want  to run  text editor
+    elif( choose_command == "run_sky_notepad"):
+        os.system("C:Users/USER/sky.py")
+    elif (choose_command == "run_yandex"):
+        os.system("C:/Users/USER/AppData/Local/Yandex/YandexBrowser/Application/browser.exe")
+   
      
 command1=input("")   
 if (command1 == "sudo_load_files_raspberry_pi_compiler_gcc20" ):
@@ -212,9 +237,27 @@ if (command2 == "sudo create file-prioritet"):
     ask_prioritet=int (input("PRIORITET OF THE FILES (0-20) : "))
     ask_file_for_prioritet = input('Name of file:')
     print (" File :",ask_file_for_prioritet,"has prioritet",ask_prioritet )
-
+if (command2 == "create_text_simple_file"):
+    print(Fore.GREEN + '**************Creating_text_file')
+    simple_text_file = open("simple.txt" , "w", encoding='utf-8')
+    lines_for_simple_text_file = input("Enter any text for writting in the file :")
+    simple_text_file.writelines(lines_for_simple_text_file)
+    #close file 
+    simple_text_file.close()
+if (command2 == "version_kernel"):
+    #print version of  kernel 
+    print(version_of_kernel)
+    
+#function for creating 
+def create_text_file ():
+    enter_console_comand=input(Fore.GREEN+ "$comand:")
+    print(Style.RESET_ALL)
+    while(enter_console_comand !="exit"):
+        text_file= open("file.txt" , "w" , encoding="utf-8")
+        lines_in_file = input ("$:")
+        text_file.writelines(lines_in_file)
+        text_file.close()
+        enter_console_comand=input(Fore.GREEN+ "$comand:")
+create_text_file()
 
 input("\n\nНажмите enter , чтобы выйти") 
-
-               
-                 
