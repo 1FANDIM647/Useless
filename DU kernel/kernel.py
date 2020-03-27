@@ -1,13 +1,16 @@
 import random
+import os
+
 import datetime
+import time
 import colorama
 from colorama import Fore, Back, Style
 colorama.init()
-print("\t\t\t\t\tDUNIX 1.0")
-print("\t\t\tCopyright (c) Blessedsoft corparation ,2000 ©. Canada\n")
+print("\t\t\t\t\tMICRO_TERMINAL 0.6")
+print("\t\t\tCopyright (c) Blessedsoft corparation ,2000 ©. Australia\n")
 print("\n")
 
-
+print(time.ctime()) 
 print(datetime.date.today())# time now 
 
 
@@ -18,13 +21,25 @@ print("\n")
 
 
 
+print (Fore.MAGENTA + 
+"""
+     *    
+    ***
+   * * *
+  * * * *
+ * *  *  *
+***********
 
+"""
+)
 
 print(Fore.RED+    "FILES                | F1 |")
 print(Fore.BLUE+   "SERIAL NUMBER DISK   | F2 |")
 print(Fore.YELLOW+ "DISK                 | F3 |    ")
 print(Fore.GREEN+  "MEMORY NTFS          | F4 | ")
 print(Fore.MAGENTA+"Configuration        | F5 |")
+print(Fore.GREEN+  "Ip loader on screen        ")
+print(Fore.GREEN+"GENERATE PASSWORD  |GEN_PASS|  ")
 
 print(Style.RESET_ALL)
 
@@ -60,8 +75,10 @@ def binary_search(list ,item):
             low = mid +1
     return None 
 #each file has prioritet 
-LIST_FILES_AND_THEIR_NUMBER = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]
 
+LIST_FILES_AND_THEIR_NUMBER = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]
+#version of kernel 
+version_of_kernel = "0.5.2"
 choose_command=""
 while not choose_command:
 
@@ -138,95 +155,53 @@ while not choose_command:
                ACPI    Driver by BlessedSoft  Kernel
                Adev    Driver by BlessedSoft  Kernel
                Amd8    Driver by AMD          Kernel
-               AmdK    Driver by AMD          Kernel
+               AmdS    Driver by AMD          Kernel
+               Amd7    Driver by AMD          Kernel
+               AmdK    Keyboard               Kernel
             """)      
-    elif (choose_command == "DEATH EXECUTION"):
-        print("\t\t\t\tExecution Death game :)")
-        print("********************************")
-        HANGMAN = (
-          """
-          -1
-          """
-          ,
-          """
-          -2      
-          """
-          ,
-          """
-          -3
-          """
-          ,
-          """
-          -4
-          """
-          ,
-          """
-          -5      
-          """
-          ,
-          """
-          -6
-          """
-          ,
-          """
-          -7
-          """
-          ,
-          """
-          -8
-          """
-        )
-        #MAXIMUM  AMOUNT OF MISTAKES
-        MAX_WRONG = len(HANGMAN) - 1
-       #WORDS FOR GAME  
-       WORDS  = ['OVERUSED' , 'CLAM', 'GUAM','TAFFETA' , 'PYTHON','PASCAL']
-
-       word = random.choice(WORDS)
+    elif (choose_command == "ip_loader_on_screen"):
        
-       so_far = "-" * len(word) #guess by one letter (for example "p")
+        print("******GETTING IP*******")
+        print("Where you are from")
+        country_for_IP = input("I am from :")
+        if (country_for_IP ==  'Belguim'):
+            Belgium_ip_first_number = 91
+            Belgium_ip_second_number = random.randint(12,31)
+            Belgium_ip_third_number = random.randint(1,100)
+            Belgium_ip_firth_number =random.randint(1,69)
+            print("Your IP in Belgium :" , Belgium_ip_first_number , "." ,Belgium_ip_second_number ,".",Belgium_ip_third_number,".",Belgium_ip_firth_number)
+        if (country_for_IP == 'France'):
+            France_ip_first_number = 176
+            France_ip_second_number = random.randint(12,31)
+            France_ip_third_number = random.randint(1,100)
+            France_ip_firth_number =random.randint(1,69)
+            print("Your IP in France :" , France_ip_first_number , "." ,France_ip_second_number ,".",France_ip_third_number,".",France_ip_firth_number)
+    elif (choose_command == "GEN_PASS"):
+        chars = '+-/&*()$#@!1234567890qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM'
+        number_of_passwords = int(input("How much passwords do you want to generate ?:"))      
+        lenght_of_password = int(input("Lenght_of_password:"))                   
+        
+        for x in range(number_of_passwords):
+            password_g =''
 
-       wrong = 0 # amount of mistakes 
+            for i in range(lenght_of_password):
+                password_g +=random.choice(chars)
+            print (password_g)     
+            
+            #write down passwords in text file 
 
-       used = [] #letters which player used to 
-     
-       if (quesstion_in_execution_death_game == "yes" or "YES " or "Yep" ):
-           print ("\t\t\tWelcome!\n ")
-           while wrong < MAX_WRONG and so_far != word :
-               print(HANGMAN [wrong])
-               print("\nYou used these letters:", used[])
-               print("WORD :" , so_far)
-           guess input("Enter  the word :")
-           guess = guess.upper()
-           while guess in used:
-               print("You used allready:",guess)
-               guess =("Enter letter :")
-               guess = guess.upper()
-           used.append(guess)
-           if guess in word:
-               print ("\nYes! ", guess  ,"there is in")
-               #new line so_far with gussed letter or letters
-               new = ""
-               for i in range(len(word)):
-                   if guess == word[i]:
-                       new += guess
-                   else:
-                       new += so_far[i]
-               so_far = new
-            else:
-                print("mistake")
-                wrong +=1
-            if wrong  == MAX_WRONG:
-                print(HANGMAN[wrong])
-                print("\n DEATH")
-            else:
-                print("\nYou win")
-                print("WORD :"word)                      
-
-
-
+            file_passwords_generate = open('passswords.txt', 'a')
+            file_passwords_generate.write('\n' + password_g)
+            file_passwords_generate.close()
     #command for skip operation    
     elif (choose_command == "skip"):
         print("section is not choosed") 
+    #if we  want  to run  text editor
+    elif( choose_command == "run_sky_notepad"):
+        os.system("C:Users/USER/sky.py")
+    elif (choose_command == "run_yandex"):
+        os.system("C:/Users/USER/AppData/Local/Yandex/YandexBrowser/Application/browser.exe")
+   
      
 command1=input("")   
 if (command1 == "sudo_load_files_raspberry_pi_compiler_gcc20" ):
@@ -262,9 +237,31 @@ if (command2 == "sudo create file-prioritet"):
     ask_prioritet=int (input("PRIORITET OF THE FILES (0-20) : "))
     ask_file_for_prioritet = input('Name of file:')
     print (" File :",ask_file_for_prioritet,"has prioritet",ask_prioritet )
-
+if (command2 == "create_text_simple_file"):
+    print(Fore.GREEN + '**************Creating_text_file')
+    simple_text_file = open("simple.txt" , "w", encoding='utf-8')
+    lines_for_simple_text_file = input("Enter any text for writting in the file :")
+    simple_text_file.writelines(lines_for_simple_text_file)
+    #close file 
+    simple_text_file.close()
+if (command2 == "version_kernel"):
+    #print version of  kernel 
+    print(version_of_kernel)
+    
+#function for creating 
+def create_text_file ():
+    enter_console_comand=input(Fore.GREEN+ "$comand:")
+    print(Style.RESET_ALL)
+    while(enter_console_comand !="exit"):
+        text_file= open("file.txt" , "w" , encoding="utf-8")
+        lines_in_file = input ("$:")
+        text_file.writelines(lines_in_file)
+        text_file.close()
+        enter_console_comand=input(Fore.GREEN+ "$comand:")
+create_text_file()
 
 input("\n\nНажмите enter , чтобы выйти") 
 
-               
-                 
+#sourceFile = open('python.txt', 'w')
+#print("Круто же, правда?", file = sourceFile)
+#sourceFile.close()
