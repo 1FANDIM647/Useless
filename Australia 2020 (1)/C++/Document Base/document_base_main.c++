@@ -55,6 +55,22 @@ public:
     cin>>gender;
     return 0;
   }
+ // get age of the user  
+  int  get_age_of_the_user()
+  { 
+    cout<<"Enter age: ";
+    cin>>age_of_the_user;
+    if ( age_of_the_user >= 450 )
+    {
+      cout<<"impossible age"<endl;
+    }
+    return age_of_the_user;
+  } 
+
+
+// functions of calculating 
+private :
+
 };
 int main ()
 {
