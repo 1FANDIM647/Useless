@@ -1,5 +1,5 @@
 /* 
-Document Base created with purpose : to give oportunity to create convinet 
+Document Base created with purpose : to give opportunity to create convenient
 way using base date 
 GPL 2.0 
 Developed by Blessed Home 
@@ -25,15 +25,37 @@ public:
  string name; 
  
  string second_name ;
-
+ // gender of user 
+ string gender;
+ 
  int  age_of_the_user;
  
  string role_of_the_user;
   
  double salary_of_the_user; 
- 
-};
 
+// name of user 
+ int get_name_of_the_user ()
+  {
+    cout<<"Enter name: ";
+    cin>>name;
+    return 0;
+  }
+
+  int get_second_name_of_the_user()
+  {
+    cout<<" second_name: ";
+    cin>> second_name;
+    return 0;
+  }  
+// gender of the user 
+  int get_gender_of_the_user()
+  {
+    cout<<"gender";
+    cin>>gender;
+    return 0;
+  }
+};
 int main ()
 {
   // Our results in the table
