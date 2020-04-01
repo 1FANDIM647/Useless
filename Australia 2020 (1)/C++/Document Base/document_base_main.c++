@@ -113,17 +113,47 @@ int main ()
 
 
  // function  to create user in table ;
- int create_user() 
+ long int button_create_user() 
  {
-    User employe;
+  
+  // method of geeting  salary 
+  // index , constable  salary and so on .
+  
+   int salary;
+    
+  switch (salary)
+  { 
+    case 1:
+      get_salary_with_help_of_index();
+      int salary_method = get_salary_with_help_of_index();
+    break;
+    case 2:
+      constable_salary();
+      int salary_method = constable_salary();
+    break;
+    case 3:
+      any_salary();
+      int salary_method = any_salary();
+    break    
+    default:
+    cout<<" Method doesn't exist "<<endl; 
+   break;
+  } 
+
+   User employe;
   employe.get_name_of_the_user();
   employe.get_second_name_of_the_user();
   employe.get_age_of_the_user();
   employe.get_gender_of_the_user();
-  employe.get_salary_with_help_of_index();
   employe.get_the_role_of_user();
+  employe.salary_method;
 
-
+  // condition  to eaqual names , user may not  to have equal name and second name 
+  if ( name == second_name )
+  {
+    cout<<"impossible "<<endl;
+  }   
+ 
    return 0;
  }  
  
