@@ -247,7 +247,8 @@ if (command2 == "create_text_simple_file"):
 if (command2 == "version_kernel"):
     #print version of  kernel 
     print(version_of_kernel)
-    
+elif(command2 == "delete_file"):
+     os.remove(r'file.txt')  
 #function for creating 
 def create_text_file ():
     enter_console_comand=input(Fore.GREEN+ "$comand:")
