@@ -119,7 +119,7 @@ public:
 
 private:    
     // give a role to user , "employe it is object of class  "
-    string give_role (employe , string role_of_the_user)
+    string give_role (employee , string role_of_the_user)
     {  
        string role_for_the_current_user;
 
@@ -131,9 +131,9 @@ private:
        return role_of_the_user;
     }
     
-    int delete_role(employe)
+    int delete_role(employee)
     {
-      delete( employe.get_the_role_of_user);
+      delete( employee.get_the_role_of_user);
       
       return0;
     }
@@ -186,13 +186,13 @@ int main ()
    break;
   } 
 
-   User employe;
-  employe.get_name_of_the_user();
-  employe.get_second_name_of_the_user();
-  employe.get_age_of_the_user();
-  employe.get_gender_of_the_user();
-  employe.get_the_role_of_user();
-  employe.salary_method;
+   User employee;
+  employee.get_name_of_the_user();
+  employee.get_second_name_of_the_user();
+  employee.get_age_of_the_user();
+  employee.get_gender_of_the_user();
+  employee.get_the_role_of_user();
+  employee.salary_method;
 
   // condition  to eaqual names , user may not  to have equal name and second name 
   if ( name == second_name )
@@ -200,7 +200,7 @@ int main ()
     cout<<"impossible "<<endl;
   }   
   // return user
-   return employe;
+   return employee;
  }  
  
  
