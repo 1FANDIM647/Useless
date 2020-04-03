@@ -35,6 +35,8 @@ public:
   
  double salary_of_the_user; 
 
+ long int ID_code_of_the_User;
+
 // name of user 
  int get_name_of_the_user ()
   {
@@ -106,6 +108,50 @@ private :
    } 
 
 };
+
+// he has control in Data base 
+class Administrator : User public 
+{
+
+public:
+
+    string  name; 
+
+private:    
+    // give a role to user , "employe it is object of class  "
+    string give_role (employe , string role_of_the_user)
+    {  
+       string role_for_the_current_user;
+
+        cout<<" What is the role of this user:";
+        cin>>role_for_the_current_user;
+        
+       role_of_the_user = role_for_the_current_user;
+
+       return role_of_the_user;
+    }
+    
+    int delete_role(employe)
+    {
+      delete( employe.get_the_role_of_user);
+      
+      return0;
+    }
+
+};
+
+
+//Data Base can contains package with documents in defined folder 
+
+class Package 
+{
+  public:
+
+
+ private:
+
+};
+
 int main ()
 {
   // Our results in the table
@@ -120,7 +166,7 @@ int main ()
   // index , constable  salary and so on .
   
    int salary;
-    
+   // choose method  
   switch (salary)
   { 
     case 1:
@@ -153,8 +199,8 @@ int main ()
   {
     cout<<"impossible "<<endl;
   }   
- 
-   return 0;
+  // return user
+   return employe;
  }  
  
  
