@@ -12,7 +12,7 @@ Developed by Blessed Home
 #include <math>
 #include <thread>
 #include <memory>
-
+#include <fstream>
 
 using namespace std; 
 
@@ -148,8 +148,17 @@ class Package
   public:
 
 
- private:
+  private:
 
+  // crearte text file 
+
+  int crearte_text_file()
+  {
+    ofstream fout("document.txt");
+    fout.close();
+    return 0;
+  }
+  
 };
 
 int main ()
@@ -172,14 +181,17 @@ int main ()
     case 1:
       get_salary_with_help_of_index();
       int salary_method = get_salary_with_help_of_index();
+      return salary_method;
     break;
     case 2:
       constable_salary();
       int salary_method = constable_salary();
+      return salary_method;
     break;
     case 3:
       any_salary();
       int salary_method = any_salary();
+      return salary_method;
     break    
     default:
     cout<<" Method doesn't exist "<<endl; 
