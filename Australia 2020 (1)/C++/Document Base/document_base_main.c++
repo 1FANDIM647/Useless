@@ -1,7 +1,7 @@
 /* 
 Document Base created with purpose : to give opportunity to create convenient
 way using base date 
-each window in program 
+ 
 GPL 2.0 
 Developed by Blessed Home 
 2020
@@ -146,7 +146,8 @@ private:
 class Package 
 {
   public:
-
+   
+  string staus_package;              // package can be public or private
 
   private:
 
@@ -158,7 +159,37 @@ class Package
     fout.close();
     return 0;
   }
-  
+  // delete text file 
+  int delete_text_file()
+  {
+    delete(fout);
+    return 0;
+  }
+  // get text file in begin  
+  int crearte_document_repository (fout)
+  {
+    string name_ofrepository;
+   
+   // while we dont name of repository
+    while ( name_ofrepository == "")
+    {
+       cout<<"Enter name of repository:";
+       cin>>name_ofrepository;
+
+
+    }  
+     
+    if (Check_box1.Set_status == true)  // with help of checkbox we choose status
+    {
+      status_package ="private";
+    } 
+    if (Check_box2.Set_status == true )
+    {
+      status_package ="public";
+    }
+    
+    return 0;
+  }
 };
 
 int main ()
@@ -215,6 +246,14 @@ int main ()
    return employee;
  }  
  
+ //function of creating of repository
+ long int button_create_repository ()
+ {
+   Package repository;
+   repository.crearte_document_repository();
+  
+   return  repository;
+ }
  
   return 0;
 }
