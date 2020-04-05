@@ -255,5 +255,14 @@ int main ()
    return  repository;
  }
  
+  void button_delete_user()
+  {
+    delete(employee);
+  }
+  
+  void button_delete_repository()
+  {
+    delete(repository);
+  }
   return 0;
 }
