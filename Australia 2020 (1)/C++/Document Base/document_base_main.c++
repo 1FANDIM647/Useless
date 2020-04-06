@@ -255,6 +255,7 @@ class Package
 
     }while (conection = false);
     
+    string adress_spp = SPPP;
     return adress_spp;
   }
 };
@@ -320,6 +321,7 @@ int main ()
  {
    Package repository;
    repository.crearte_document_repository();
+   repository.get_address_SPPP();
   
    return  repository;
  }
