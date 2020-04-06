@@ -11,7 +11,7 @@ class Article(models.Model):
 	
 		
 class Comment(models.Model):
-	article = modesls.Foreignkey(Article, on_delete= models.CASCADE)
+	article = models.ForeignKey(Article, on_delete= models.CASCADE)
 	author_name= models.CharField('Name' , max_length = 49)
 	comment_text = models.CharField('comment' , max_length=450)
 
