@@ -137,6 +137,15 @@ private:
       
       return0;
     }
+  
+    // 
+    void send_package()
+    {
+       void get_address();
+       
+       int IP_CODE = get_address_ip_user();
+ 
+    }
 
 };
 
@@ -148,7 +157,9 @@ class Package
   public:
    
   string staus_package;              // package can be public or private
-
+  
+  bool conection;
+  
   private:
 
   // crearte text file 
@@ -190,7 +201,65 @@ class Package
     
     return 0;
   }
+
+ // any package must has sppp adrress
+  int get_adrress_SPPP()
+  {  
+    // in begin options of serser is turned out 
+  
+     get_status_of_conection (conection);
+
+    do {
+        string name_of_user_in_package = get_name_of_the_user();
+        string generate_random_adrress (){
+             
+             string country_for_SPPP;
+             cout<<"Your country ";
+             cin>>country_for_SPPP;
+
+             if (country_for_SPPP == "Russia")
+             {
+               int furst_number_of_SPPP = 100; 
+             }
+             else (country_for_SPPP == "Belarus")
+             {
+               int furst_number_of_SPPP = 101;
+             }
+             else (country_for_SPPP == "Chezh Republic")
+             {
+                int furst_number_of_SPPP = 102;
+             }
+             else (country_for_SPPP == "Sweden")
+             {
+                 int furst_number_of_SPPP = 103;
+             }
+
+             second_number_of_SPPP = 1+rand()%14525353463651435526357885769;
+             
+             third_number_of_SPPP = 1+rand()%1244132352;
+
+             furth_number_of_SPPP = 1+rand()%1143513252;
+
+             fivth_number_of_SPPP = 1+rand()%1234554464; 
+
+             six_number_of_SPPP = 1+rand()%1143152554;
+
+             seven_number_of_SPPP = 1+rand()%141425235235;
+
+              string SPPP = furst_number_of_SPPP + "."+ second_number_of_SPPP +"."+third_number_of_SPPP+"."+furth_number_of_SPPP+"."+fivth_number_of_SPPP+"."+six_number_of_SPPP+"."+seven_number_of_SPPP;
+
+
+           return SPPP;  
+        } 
+       
+
+    }while (conection = false);
+    
+    return adress_spp;
+  }
 };
+
+
 
 int main ()
 {
