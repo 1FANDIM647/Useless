@@ -1,12 +1,14 @@
 body {
     background-color: #fff;
+    font-family: 'Roboto', sans-serif;
+    padding-top: 44px; /*space inside*/
 }
 
 *{
     box-sizing: border-box; /*for all elements*/
 }
 .container {
-    border : 1px solid red;
+   
     max-width: 1200px;
     margin:auto; /* we put header in center */
 }
@@ -16,8 +18,31 @@ body {
     display: flex;  /*objects will stay in one line*/
     align-items: center; /*realtively center */
     justify-content: space-between; /*there are spaces between objects*/
+    
+    margin-bottom: 40px;
 
 }
+.input 
+{
+      /* Gray / gray-1 */
+
+background: #FFFFFF;
+/* Gray / gray-5 */
+
+border: 1px solid #D9D9D9;
+box-sizing: border-box;
+border-radius: 2px;
+font-size:16px;
+line-height: 24px;
+}
+.input-search
+{  
+    display: flex;
+    margin-left: 1000px;
+    bottom: 120px;
+   
+}
+
 .search-input {  /*line of search*/
     /* Gray / gray-1 */
 
@@ -35,6 +60,7 @@ background-image: url(./img/home.jpg); /*img in line of search*/
 background-repeat:no-repeat ;
 background-position: left 11px center;
 padding-left: 35px;
+
 }
 
 .button {
@@ -75,4 +101,42 @@ font-size: 16px;
 line-height: 24px;
 margin-right: 10px;
 
+}
+.promos 
+{
+box-shadow: 0px 7px 12px rgba(158, 158, 163, 0.1);
+background: #FFF1B8 url(./img/swetik.png) top right; /*cover of top site*/
+border-radius: 10px;
+padding: 68px 78px;
+background-repeat: no-repeat;
+margin-bottom: 56px;
+
+}
+
+
+
+
+.foodtext
+{
+    max-width: 100 ;
+}
+
+.section-heading
+{  
+    display: flex;
+    align-items:center ;
+    justify-content: space-between;
+}
+
+.cards
+{
+    display: flex;
+}
+
+.card 
+{
+   background-color: #FFFFFF;
+   box-shadow: 0px 4px 12px rgba(0,0,0,0.05);
+   border-radius: 7px;
+   overflow: hidden;
 }
