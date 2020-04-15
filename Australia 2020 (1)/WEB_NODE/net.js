@@ -18,3 +18,16 @@ http
 
 
    });
+
+   process.on(event:'SIGINT',listener:() => {
+    console.log('Signal is SIGINT');
+    server.close(callback:() => {
+    	process.exit(code:0);
+    })
+   });
+   process.on(event:'SIGTERM', listener:() => {
+     console.log('Signal is SIGTERM');
+     server.close(callback: () => {
+     	process.exit(code:0);
+     })
+   });
