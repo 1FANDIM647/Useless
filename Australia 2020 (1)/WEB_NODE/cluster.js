@@ -18,11 +18,17 @@ if (cluster.isMaster){
      }); 
 
      worker.send( message: 'Server has started  to work');
-
+     worker.on(event:'message', listener:(msg) =>{
+     	console.log('Message from worker ${worker.process.pid} : ${JSON.stringify(msg)}');
+     } );
   }
   
 }
 if (cluster.isWorker)
 {
   require(id: './worker.js'); 
+  process.on(event:'message' , listener(msg) => {
+  	console.log('message from Master: ${msg}');
+  });
+  process.send (message:{text: 'Hello', pid});
 }
