@@ -14,10 +14,6 @@ def selectionSort(arr):
 		new_arr.append(arr.pop(smallest))
 	return new_arr
   		
-def main():
-	print selectionSort([5,2,3,4,24,56])
-
-if __name__ == '__main__' :
-	
-	main()
+a= selectionSort([5,2,3,4,24,56])
+print (a)
 			
