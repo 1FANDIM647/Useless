@@ -1,3 +1,8 @@
+#function for creating of block
+#contact:  "fandimfromitaly@yandex.ru"
+#author: Mikhail Elkin
+
+
 import json
 import os
 import hashlib
@@ -7,6 +12,33 @@ def write_block(filename):
 	file = open(blockchain_dir + filename, 'rb').read()
 
 	return hashlib.md5(file).hexdigest()
+
+def check_integrity():
+	#count hash of previous block
+	#calculate hash
+	#compraise got data
+
+	blockchain_dir = os.curdir + '/blockchain/'
+	files = os.listdir(blockchain_dir)
+	files = sorted([int(i) for i in files])
+
+	for file in files[1:]:
+		f = open(blockchain_dir + str(file))
+		h = json.load(f)['hash']
+
+		actual_hash = get_hash(prev_file)
+
+		if h ==actual_hash:
+			res = 'Ok'
+		else:
+			res = 'Corrupted'
+		result.append({'block': prev_file, 'result': res})	
+		
+		#print('block {} is: {}'.format(prev_file , res))
+
+
+
+
 
 def write_block(name , amount , to_whom , prev_hash = ''):
 
