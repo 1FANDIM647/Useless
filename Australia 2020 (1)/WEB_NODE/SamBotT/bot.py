@@ -15,10 +15,10 @@ def welcome_speech(message):
 	#bot.send_sticker(message.chat.id, sti)
     
     #keyboard
-	markup = types.ReplyKeyboardMarkup(resize_keyboard = True)
-	item1  = types.KeyboardButton("random number")
-	item2 = types.KeyboardButton("Hey !")
-    item3 = types.KeyboardButton("Weather")
+	markup = types.InlineKeyboardMarkup(row_width=2)
+	item1  = types.InlineKeyboardButton("random number" ,callback_data= 'random')
+	item2 = types.InlineKeyboardButton("Hey !",callback_data ='good')
+    item3 = types.InlineKeyboardButton("Weather", callback_data='bad')
 
     markup.add(item1,item2,item3)
 
@@ -27,7 +27,31 @@ def welcome_speech(message):
 
 
 def response_speech(message):
-	bot.send_message(message.chat.id, message.text)#bot will write , that you wrote
+	if message.chat.type == 'private':
+		if message.text == "random number":
+			bot.send_message(message.chat.id, str(random.randit(0,1004300)))
+		elif message.text = "Hey !":
+			bot.send_message(message.chat.id, "Hi, sweet one!" , reply_markup=markup)
+		else:
+			bot.send_message(message.chat.id, "I cant show weather")
+         
+@bot.callback_query_handler(func=lambda call:True)
+def callback_inline(call):
+	try:
+		if call.message:
+			if call.data == 'good':
+
+				bot.send_message(call.message.chat.id , 'Nice')
+			elif call.data == ' bad':
+				bot.send_message(call.message.chat.id , 'Things happen')
+
+
+				#remove inline buttons
+				bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id, text="random",
+                reply_markup=None)
+
+				
+
 
 bot.polling(none_stop = True)
 
