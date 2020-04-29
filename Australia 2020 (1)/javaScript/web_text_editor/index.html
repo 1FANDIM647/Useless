@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html>
+
+<!-- служебная часть -->
+
+<head>
+
+  <!-- заголовок страницы -->
+
+  <title>Прокачанный текстовый редактор</title>
+
+  <!-- настраиваем служебную информацию для браузеров -->
+
+  <meta charset="utf-8">
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+  <!-- задаём CSS-стили прямо здесь же, чтобы всё было в одном файле -->
+
+  <style type="text/css">
+
+    /*задаём общие параметры для всей страницы: шрифт и отступы*/
+
+    body{
+
+      text-align: left;
+
+      margin: 10;
+
+      font-family: Courier New, Courier;
+
+      font-size: 20px;
+
+      background-color: lightgray;
+
+    } 
+
+    /* оформляем окно редактора */
+
+    .editorSheet{
+
+      min-height: 65vw;
+
+      border: solid; 
+
+      border-width: 0px; 
+
+      text-align: left;
+
+      background-color: white;
+
+      -webkit-box-shadow: 6px 10px 9px 0px rgba(0,0,0,0.75);
+
+      -moz-box-shadow: 6px 10px 9px 0px rgba(0,0,0,0.75);
+
+      box-shadow: 6px 10px 9px 0px rgba(0,0,0,0.75);
+
+      padding: 15px;
+
+      border-style: solid;
+
+      border-width: 1px;
+
+    } 
+
+    /* стиль заголовка h1*/
+
+    h1{
+
+      font-size: 40px;
+
+      font-family: Tahoma;
+
+      font-weight: 900;
+
+      padding-bottom: 30px;
+
+    } 
+
+    /* стиль заголовка h2*/
+
+    h2{
+
+      font-size: 25px;
+
+      font-family: Arial;
+
+      font-weight: 900;
+
+      color: black;
+
+      font-weight: 400;
+
+      } 
+
+    /* настраиваем внешний вид поля ввода*/
+
+    input{
+
+      display: inline-block;
+
+      margin: 20px auto;
+
+      border: 2px solid #eee;
+
+      padding: 10px 20px;
+
+      font-family: Verdana, Arial, sans-serif;
+
+      font-size: 13px;
+
+    } 
+
+    /*как будет выглядеть каждый элемент нашего списка документов*/
+
+    .tdItem{
+
+      text-align: left;
+
+      padding: 10px;
+
+      cursor: default;
+
+      border-radius: 7px;
+
+      font-size: 16px;
+
+    } 
+
+    /*что произойдёт, когда мы наведём курсор на название документа в списке*/
+
+    .tdItem:hover{
+
+      background-color: lightgreen;
+
+    } 
+
+  /*закончили со стилями*/
+
+  </style>
+
+<!-- закрываем служебную часть страницы -->
+
+</head>
+
+<!-- началось содержимое страницы -->
+
+<body>
+
+  <!-- началась визуальная часть -->
+
+  <div class="container" >
+
+    <div class="row">
+
+      <!-- делаем заголовок -->
+
+      <div class="col-12">
+
+        <h1 id="h1_name">Текстовый редактор с автосохранением</h1>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+
+
+  <div class="container" >
+
+    <div class="row">
+
+      <div class="col-12 col-sm-12 col-md-4 col-lg-3 col-xl-3">
+
+        <!-- делаем боковой список с названиями документов-->
+
+          <!-- заголовок списка  -->
+
+          <h2>Документы</h2>
+
+          <p style="font-size: 14px">Alt + клик — удаляет документ</p>
+
+          <!-- поле ввода, куда пишем название новых документов -->
+
+          <div id="tdlApp">
+
+            <input type="text" class="form-control" placeholder="Новый документ">
+
+           <!-- создаём пока ещё пустой список -->
+
+            <div class="tdlDiv">
+
+              <ul class="List list-unstyled">
+
+                <!-- тут появятся наши названия документов, когда мы их добавим -->
+
+              </ul>
+
+            </div>
+
+          </div>
+
+        <!-- закончили с оформлением списка -->
+
+      </div>
+
+      <!-- делаем само окно редактора, где пишем весь текст -->
+
+      <div class="col-12 col-sm-12 col-md-8 col-lg-9 col-xl-9">
+
+        <div id="editor" contenteditable="true" class="editorSheet">
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- закончилась видимая часть -->
+
+  <!-- подключаем JQuery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js">
+
+  </script>
+
+  <!-- пишем скрипт, который будет постоянно сохранять наш текст -->
+
+  <script>
+
+    // заводим переменные под наши задачи
+
+    var List = $('#tdlApp ul');
+
+    var Mask = 'tdl_';
+
+    // тут будем хранить внутренний номер документа, чтобы связать список и текст в редакторе
+
+    var N_store;
+
+    // отслеживаем каждое нажатие клавиши в редакторе и при каждом нажатии выполняем команду
+
+    document.addEventListener('keydown', function(e) {
+
+      // записываем содержимое нашего редактора в хранилище, при этом ячейка связана с текущим документом
+
+      localStorage.setItem(N_store + 'text_in_editor', document.getElementById('editor').innerHTML);
+
+    } );
+
+    // функция, которая берёт из памяти наши документы и делает из них список
+
+    function showTasks( ){
+
+      // временно скрываем окно редактора
+
+      document.getElementById('editor').style.display = "none";
+
+      // узнаём размер хранилища
+
+      var Storage_size = localStorage.length;
+
+      // если в хранилище что-то есть…
+
+      if (Storage_size > 0){
+
+        // то берём и добавляем это в список документов 
+
+        for (var i = 0; i < Storage_size; i++){
+
+          var key = localStorage.key(i);
+
+          if(key.indexOf(Mask) == 0){
+
+            // запоминаем внутренний номер документа, чтобы правильно показать текст в редакторе
+
+            N_store = key[4];
+
+            // делаем содержимое хранилища элементами списка
+
+            $('<li></li>').addClass('tdItem')
+
+              .attr('data-itemid', key)
+
+              .text(localStorage.getItem(key))
+
+              .appendTo(List);
+
+          } 
+
+        }  
+
+      }  
+
+    } 
+
+    // сразу вызываем эту функцию, вдруг в памяти уже остались документы с прошлого раза
+
+    showTasks();
+
+    // следим, когда пользователь напишет название нового документа в поле ввода и нажмёт Enter
+
+    $('#tdlApp input').on('keydown',function(e){
+
+      if(e.keyCode != 13) return;
+
+      var str = e.target.value;
+
+      e.target.value = "";
+
+      // если в поле ввода было что-то написано — начинаем обрабатывать
+
+      if(str.length > 0){
+
+        var number_Id = 0;
+
+        List.children().each(function(index, el){
+
+          var element_Id = $(el).attr('data-itemid').slice(4);
+
+          if(element_Id > number_Id)
+
+            number_Id = element_Id;
+
+        } )
+
+        number_Id++;
+
+        // отправляем новый документ сразу в память
+
+        localStorage.setItem(Mask+number_Id,str);
+
+        // готовим для него новое поле редактора
+
+        // берём текущий внутренний номер документа
+
+        N_store = number_Id;
+
+        // отправляем в память 
+
+        localStorage.setItem(N_store + 'text_in_editor','');
+
+        // делаем окно редактора видимым и очищаем текст в нём
+
+        document.getElementById('editor').innerHTML = '';
+
+        document.getElementById('editor').style.display = "block";
+
+        // добавляем название документа в конец списка
+
+        $('<li></li>').addClass('tdItem')
+
+          .attr('data-itemid', Mask+number_Id)
+
+          .text(str).appendTo(List);
+
+        // меняем заголовок редактора
+
+        document.getElementById('h1_name').innerHTML = localStorage.getItem('tdl_' + N_store);
+
+      } 
+
+    } );
+
+    // при клике на названии документа — делаем его активным и даём с ним работать
+
+    $(document).on('click','.tdItem', function(e){
+
+      // находим документ, по которому кликнули
+
+      var jet = $(e.target);
+
+      // если при клике был нажат Atl
+
+      if (event.altKey) {
+
+        // то убираем документ из памяти
+
+        localStorage.removeItem(jet.attr('data-itemid'));
+
+        localStorage.removeItem(jet.attr('data-itemid')[4] + 'text_in_editor');
+
+        // очищаем и скрываем окно редактора
+
+        document.getElementById('editor').innerHTML = '';
+
+        document.getElementById('editor').style.display = "none";
+
+        // меняем заголовок редактора
+
+        document.getElementById('h1_name').innerHTML = 'Текстовый редактор с автосохранением';
+
+        // и убираем документ из списка
+
+        jet.remove();
+
+        // выходим из функции, чтобы не обрабатывать обычный клик
+
+        return true;
+
+      } 
+
+      // обрабатываем обычный клик — делаем документ активным
+
+      // получаем внутренний номер документа
+
+      N_store = jet.attr('data-itemid')[4];
+
+      // делаем окно редактора видимым и заполняем его содержимым из памяти
+
+      document.getElementById('editor').style.display = "block";
+
+      document.getElementById('editor').innerHTML = localStorage.getItem(N_store + 'text_in_editor');
+
+      // меняем заголовок редактора
+
+      document.getElementById('h1_name').innerHTML = localStorage.getItem('tdl_' + N_store);
+
+    } )
+
+  // закончился скрипт
+
+  </script>
+
+<!-- закончилось содержимое страницы -->
+
+</body>
+
+<!-- конец всего HTML-документа -->
+
+</html>
