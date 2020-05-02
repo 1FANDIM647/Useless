@@ -26,3 +26,46 @@ transport_address listen_address
 /*local address*/
 int listen_conn; 
 unsigned char data[MAX_PKT_SIZE]; // package for holging of data
+
+struct conn
+{
+	transport_address local_address , remote_address;  // status of conection
+	cstate state;
+	unsigned char *user_buf_addr;
+	int byte_count;
+	int clr_req_received;
+	CLEAR_REQ
+	int timer;
+	int credits;
+
+} conn[MAX_CONN+1];
+
+void sleep(void);
+void wakeup(void);
+void to_net(int cid, int q, int m,pkt_type pt, unsigned char *p,int bytes);
+void from_net(int *cid, int *q, int *m, pkt_type *pt, unsigned char *,int bytes);
+
+int listen(transport_address t)
+{  // customer waits for connection
+	int i = 1, found = 0;
+    
+    for (i = 1; i <= MAX_CONN; i++)
+    	if (conn[i].state == QUEUED && conn[i].local_address ==t)
+    	{
+    		found = i;
+    		break;
+    	}
+
+    if (found == 0)
+    {
+    	listen_address = t; sleep(); i = listen_conn ;
+    }
+
+    conn[i].state = ESTABLISHED;
+    conn[i].state = 0;
+    listen_conn = 0;
+    to_net (i,0,0,CALL_ACC ,data , 0);
+
+    return(i);	
+}
+
